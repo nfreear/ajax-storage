@@ -1,0 +1,25 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>*Mocha Tests: ajax-storage</title>
+  <link rel="stylesheet" href="../node_modules/mocha/mocha.css" />
+</head>
+<body>
+  <div id="mocha"><h1>Mocha Tests: ajax-storage</h1></div>
+
+  <script src="../node_modules/jquery/dist/jquery.js"></script>
+
+  <script data-src="../lib/base64.js"></script>
+  <script data-src="../lib/underscore-min.js"></script>
+  <script src="../ajax-storage.js"></script>
+  <script src="../node_modules/mocha/mocha.js"></script>
+  <script src="../node_modules/chai/chai.js"></script>
+  <script>mocha.setup('bdd')</script>
+  <script src="ajax_storage_test.js"></script>
+  <script>
+    mocha.checkLeaks();
+    mocha.globals(['_', 'Github']);
+    mocha.run();
+  </script>
+</body>
+</html>

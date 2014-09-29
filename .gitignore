@@ -26,3 +26,19 @@ node_modules
 
 # Users Environment Variables
 .lock-wscript
+
+
+
+# NDF: For now...
+
+.DS_Store
+*copy.*
+src/header.js
+local-build/
+
+#Gruntfile.js
+#package.json
+#.gitignore
+
+
+#End.

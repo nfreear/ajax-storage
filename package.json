@@ -1,0 +1,61 @@
+{
+  "name": "ajax-store",
+  "version": "0.1.0",
+  "description": "Seamless HTML5 localStorage caching for jQuery Ajax requests.",
+  "main": "ajax-store.js",
+  "dependencies": {
+    "xmlhttprequest": "*",
+    "jquery": "*"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "0.10.0",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-concat": "~0.3.0",
+    "mocha": "*",
+    "chai": "*"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nfreear/ajax-store.git"
+  },
+  "keywords": [
+    "jQuery",
+    "ajax",
+    "browser",
+    "cache",
+    "localStorage",
+    "performance"
+  ],
+  "author": "Nick Freear <nfreear@yahoo.co.uk> (https://github.com/nfreear)",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "gitHead": "",
+  "bugs": {
+    "url": "https://github.com/nfreear/ajax-store/issues"
+  },
+  "browser": {
+    "xmlhttprequest": false
+  },
+  "testling": {
+    "files": "test/*_test.js",
+    "browsers": [
+      "ie/8..latest",
+      "chrome/36..latest",
+      "firefox/31..latest",
+      "opera/12.0",
+      "opera/24..latest",
+      "safari/latest",
+      "firefox/nightly",
+      "opera/next",
+      "chrome/canary",
+      "iphone/6",
+      "ipad/6",
+      "android-browser/latest"
+    ],
+    "harness": "mocha"
+  }
+}

@@ -75,11 +75,12 @@ describe("$.ajaxStorage - HTTP", function () {
       storageMaxAge: STORAGE_MAX_AGE,
 
       success: function (data, textStatus, jqXHR) {
-        console.log("$.ajax_storage: success", arguments);
+        console.log("$.ajax_storage - HTTP: success", arguments);
 
         expect(textStatus, "$.ajax_storage: status").to.equal("success");
         expect(data.a, "$.ajax_storage: data.a").to.be.a("string");
         expect(jqXHR, "$.ajax_storage: jqXHR").to.be.an("object");
+        expect(jqXHR.ajaxStorage, "jqXHR.ajaxStorage").to.not.exist;
         //expect(jqXHR.ajaxStorage.fromStorage, "jqXHR.ajaxStorage.fromStorage").to.equal( false );
 
         done();
@@ -103,13 +104,15 @@ describe("$.ajax_storage - storage", function () {
       url: URL,
       dataType: "json",
       storage_max_age: STORAGE_MAX_AGE,
+      log: function () { console.log(arguments); },
 
       success: function (data, textStatus, jqXHR) {
-        console.log("$.ajax_storage: success", arguments);
+        console.log("$.ajax_storage - storage: success", arguments);
 
         expect(textStatus, "$.ajax_storage: status").to.equal("success");
         expect(data.a, "$.ajax_storage: data.a").to.be.a("string");
         expect(jqXHR, "$.ajax_storage: jqXHR").to.be.an("object");
+        expect(jqXHR.ajaxStorage, "jqXHR.ajaxStorage").to.exist;
         expect(jqXHR.ajaxStorage.fromStorage,
             "jqXHR.ajaxStorage.fromStorage").to.equal( true );
 
@@ -122,32 +125,5 @@ describe("$.ajax_storage - storage", function () {
 
 
 
-// ============================
 // https://github.com/michael/github/blob/master/test/auth_test.js
-
-var x_expect = chai.expect
-  , TEST_USERNAME = "mikedeboertest"
-  , TEST_PASSWORD = "test1324";
-
-// var util = require("util");
-
-describe("Auth", function(){
-  this.timeout(10000);
-  it("should authenticate with basic auth", function(done){
-    var github = new Github({
-      username: TEST_USERNAME,
-      password: TEST_PASSWORD,
-      auth: "basic"
-    });
-    var user = github.getUser();
-    user.repos(function(err, repos) {
-      // console.error(util.inspect(err));
-      expect(err).to.be.null;
-      repos.should.be.ok;
-      repos.length.should.be.above(1);
-      done();
-
-    });
-
-  });
-});
+//End.

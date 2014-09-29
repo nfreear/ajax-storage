@@ -3,20 +3,11 @@ ajax-storage Javascript, version 0.0.1.
 
 @copyright	Nick Freear, 25 September 2014.
 @link		https://github.com/nfreear/ajax-storage
-@example
-
-  $.ajax_storage({
-    url: 'http://...',
-    success: function (data) {
-      // Do something with the data.
-    }
-  });
-
-
-(  jQuery plugin template:
-http://kolodny.github.io/blog/blog/2013/12/27/my-favorite-jquery-plugin-template
-)
 */
+
+if (typeof require !== 'undefined') {  // Node.js
+  var jQuery = require('jquery');
+}
 
 
 //;
@@ -46,18 +37,12 @@ http://kolodny.github.io/blog/blog/2013/12/27/my-favorite-jquery-plugin-template
       store_max_age:5 * 60 * 1000,  //Milliseconds?
 
       // Callback functions.
-      log: function () {
-        /*console.log(arguments);*/
-      },
-      success: function (data, textStatus, jqXHR) {
-        /*my_log(pluginName, "Success", data);*/
-      },
-      error: function (jqXHR, textStatus, errorThrown) {
-        /*my_log(pluginName, "ERROR", textStatus, errorThrown);*/
-      }
+      log: function () { },
+      success: function (data, textStatus, jqXHR) { },
+      error: function (jqXHR, textStatus, errorThrown) { }
     };
 
-    $/*.fn*/[pluginName] = function (url, options) {
+    $[pluginName] = function (url, options) {
 
       // If url is an object, simulate pre-1.5 signature
 		if ( typeof url === "object" ) {
@@ -84,15 +69,16 @@ http://kolodny.github.io/blog/blog/2013/12/27/my-favorite-jquery-plugin-template
       if (store_max_age) {
 		options.data = getStorage();
 	    if (options.data) {
-	      options.success(options.data, null, null);
 
-	      return dfd.resolve(options.data, null, null);
+	      g_jqXHR.ajaxStorage = {
+	        fromStorage: true,
+	        url: options.url
+	      };
+	      options.success(options.data, "success", g_jqXHR);
+
+	      return dfd.resolve(options.data, "success", g_jqXHR);
         }
       }
-
-      /*if (options.data) {
-        return result;
-      }*/
 
       var ajax_options = options;
 
@@ -107,51 +93,17 @@ http://kolodny.github.io/blog/blog/2013/12/27/my-favorite-jquery-plugin-template
       };
 
       $.ajax(ajax_options)
-      /*$.ajax({
-        url: options.url,
-        dataType: options.dataType,
-        data: options.data,
-        async: options.async,
-		headers: options.headers,
-		xhrFields: options.xhrFields,
-		jsonpCallback: options.jsonpCallback,
-      })*/
       .done(function (data, stat, jqXHR) {
-        var meta = jqXHR;
-        meta.url = options.url;
+        // Too late to modify 'jqXHR'!
 
-        setStorage(data, meta);
-
-	    options.success(data, stat, jqXHR);
+        setStorage(data, jqXHR);
 
 	    return jqXHR;
-	    //return dfd.resolve(data, stat, jqXHR);
-      })
-	  /*.fail(function (jqXHR, stat, errorThrown) {
-	    options.error(jqXHR, stat, errorThrown);
-
-	    return jqXHR;
-	  })*/;
-
+      });
 
       return g_jqXHR;
-
-
-      /*return this.each(function() {
-        var elem = this,
-          $elem = $(elem);
-
-        // heres the guts of the plugin
-          if (options.testFor(elem)) {
-            $elem.css({
-              borderWidth: 1,
-              borderStyle: 'solid',
-              borderColor: options.color
-            });
-          }
-      });*/
     };
-    $/*.fn*/[pluginName].defaults = defaults;
+    $[pluginName].defaults = defaults;
 
   })('ajax_storage');
 
@@ -163,7 +115,7 @@ http://kolodny.github.io/blog/blog/2013/12/27/my-favorite-jquery-plugin-template
   function padToHex(str, length) {
     length = length || 16;
     var hex = convertToHex(str);
-
+	//TODO:
     return hex;
   }
 
@@ -205,7 +157,7 @@ http://kolodny.github.io/blog/blog/2013/12/27/my-favorite-jquery-plugin-template
     return value ? JSON.parse(value) : false;
   }
 
-  function setStorage(data, meta) {
+  function setStorage(data, jqXHR) {
     var
       dt = new Date(),
       storage = window[store_type];
@@ -216,11 +168,10 @@ http://kolodny.github.io/blog/blog/2013/12/27/my-favorite-jquery-plugin-template
     storage.setItem(store_prefix + 'timestamp', dt.getTime());
     storage.setItem(store_prefix + 'time', dt.toString());
 
-    meta.responseJSON = null;
-	meta.responseHeaders = meta.getAllResponseHeaders(); // Empty for cross-origin requests!
+    jqXHR.responseJSON = null;
+    jqXHR.responseHeaders = jqXHR.getAllResponseHeaders(); // Empty for cross-origin requests!
 
-    ///storage.setItem(store_prefix + 'status', status);
-    storage.setItem(store_prefix + 'meta', JSON.stringify(meta));
+    storage.setItem(store_prefix + 'jqXHR', JSON.stringify(jqXHR));
 
     my_log(store_type + ": " + t("save data"), data); //data
   }

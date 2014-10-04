@@ -47,7 +47,7 @@ describe("$.ajax", function () {
   this.timeout(2000);
   it("should get JSON data via HTTP and expose it via 'done()'.", function (done) {
     var result = $.ajax({
-      url: URL,
+      url: URL,  //"/404_Not_found"
       dataType: "json"
     })
     .done(function (data) {
@@ -100,13 +100,14 @@ describe("$.ajaxStorage - HTTP", function () {
 describe("$.ajax_storage - storage", function () {
   this.timeout(2000);
   it("should get JSON data from `localStorage`, and indicate that storage is used.", function (done) {
+    //var result = $.getJSON(URL)
     var result = $.ajax_storage({
       url: URL,
       dataType: "json",
       storage_max_age: STORAGE_MAX_AGE,
-      log: function () { console.log(arguments); },
-
-      success: function (data, textStatus, jqXHR) {
+      log: function() { console.log(arguments) }
+    })
+    .done(function (data, textStatus, jqXHR) {
         console.log("$.ajax_storage - storage: success", arguments);
 
         expect(textStatus, "$.ajax_storage: status").to.equal("success");
@@ -117,7 +118,12 @@ describe("$.ajax_storage - storage", function () {
             "jqXHR.ajaxStorage.fromStorage").to.equal( true );
 
         done();
-      }
+      //}
+    })
+    .fail(function (jqXHR, stat, ex) {
+      console.log("$.ajax_storage: error", arguments);
+      expect(stat, "$.ajax: error").to.equal("success");
+      done();
     });
 
   });

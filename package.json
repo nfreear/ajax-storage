@@ -12,6 +12,8 @@
     "grunt-contrib-jshint": "0.10.0",
     "grunt-contrib-uglify": "~0.2.2",
     "grunt-contrib-concat": "~0.3.0",
+    "grunt-saucelabs": "*",
+    "request": "*",
     "mocha": "*",
     "chai": "*"
   },

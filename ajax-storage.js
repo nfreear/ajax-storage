@@ -23,23 +23,19 @@ if (typeof require !== 'undefined') {  // Node.js
     var defaults = {
       // Accepts all `jQuery.ajax()` settings, except `beforeSend`.
       // See, http://api.jquery.com/jQuery.ajax/
-      /*async:   true,
-      url:     null,
-      data:    null,
-      dataType:'jsonp',
-      jsonpCallback: null,
-      headers: {},
-      xhrFields: {},*/
+      /* async:   true,
+      ... */
 
       // Storage
       store_type:   'sessionStorage',
       store_prefix: pluginName,
-      store_max_age:5 * 60 * 1000,  //Milliseconds?
+      store_max_age:5 * 60 * 1000  //Milliseconds?
 
-      // Callback functions.
-      log: function () { },
+      /*// Callback functions.
+      , log: function () { },
       success: function (data, textStatus, jqXHR) { },
       error: function (jqXHR, textStatus, errorThrown) { }
+      */
     };
 
     $[pluginName] = function (url, options) {
@@ -54,12 +50,12 @@ if (typeof require !== 'undefined') {  // Node.js
 
       options = $.extend(true, {}, defaults, options);
 
-      my_log = options.log;
+      my_log = my_log || options.log || function () {};
 
       if (!options.url) {
-        options.error(null, "{url} is required!");
+        options.error && options.error(g_jqXHR, "error", "{url} is required!");
 
-        return dfd.reject(null, "{url} is required!");
+        return dfd.reject(g_jqXHR, "error", "{url} is required!");
       }
 
 	  store_prefix = prefix(options);
@@ -74,7 +70,8 @@ if (typeof require !== 'undefined') {  // Node.js
 	        fromStorage: true,
 	        url: options.url
 	      };
-	      options.success(options.data, "success", g_jqXHR);
+
+	      options.success && options.success(options.data, "success", g_jqXHR);
 
 	      return dfd.resolve(options.data, "success", g_jqXHR);
         }
@@ -86,11 +83,11 @@ if (typeof require !== 'undefined') {  // Node.js
       ajax_options.store_type =
       ajax_options.store_prefix =
       ajax_options.store_max_age = null;
-      ajax_options.beforeSend = function (jqXHR, settings) {
+      /*ajax_options.beforeSend = function (jqXHR, settings) {
         g_jqXHR = jqXHR;
 
         my_log("beforeSend");
-      };
+      };*/
 
       $.ajax(ajax_options)
       .done(function (data, stat, jqXHR) {
@@ -106,6 +103,14 @@ if (typeof require !== 'undefined') {  // Node.js
     $[pluginName].defaults = defaults;
 
   })('ajax_storage');
+
+
+  $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
+    g_jqXHR = jqXHR;
+    if (options.log) { my_log = options.log; }
+
+    my_log && my_log("ajaxPrefilter", arguments);
+  });
 
 
   function prefix(opts) {

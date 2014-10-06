@@ -81,14 +81,14 @@ module.exports = function(grunt) {
 			server: {
 				options: {
 					base: '.',
-					port: 8888
+					port: 8810
 				}
 			}
 		},
         mocha: {
 			all: {
 				options: {
-					urls: ['http://localhost:8888/~Nick/ajax-storage/test/test_runner.html']
+					urls: ['http://127.0.0.1:8010/test/test_runner.html']
 				}
 			}
 		},
@@ -98,7 +98,7 @@ module.exports = function(grunt) {
             options: {
               username: sauceuser, // Defaults to ENV SAUCE_USERNAME (if applicable)
               key: saucekey, // Defaults to ENV SAUCE_ACCESS_KEY (if applicable)
-              urls: ['http://127.0.0.1:8888/~Nick/ajax-storage/test/test_runner.html'],
+              urls: ['http://127.0.0.1:8010/test/test_runner.html'],
               build: process.env.CI_BUILD_NUMBER,
               testname: 'Sauce Unit Test for ajax-storage',
               browsers: [
@@ -115,7 +115,6 @@ module.exports = function(grunt) {
     //grunt.registerTask('default', ['concat', 'uglify', 'cssmin', 'copy']);
     grunt.registerTask('default', ['jshint', 'uglify', 'concat']);
 
-    //grunt.registerTask('test', ['server', 'qunit', 'saucelabs-qunit']);
     grunt.registerTask('test', [ 'saucelabs-mocha' ]);
 
 };

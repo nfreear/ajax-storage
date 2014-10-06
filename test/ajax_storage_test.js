@@ -6,10 +6,8 @@
 if (typeof require !== 'undefined') {
     var $ = require('jquery')
       , X_ajax_storage = require("../ajax-storage.js")
-      //, mocha = require("mocha")
       , chai = require("chai");
 
-    //mocha.setup('bdd');
 }
 chai.should();
 var expect = chai.expect

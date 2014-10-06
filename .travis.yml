@@ -13,3 +13,6 @@ before_script:
 script:
   - mocha-phantomjs -R spec http://127.0.0.1:8010/test/test_runner.html
 
+#after_script:
+#  - ps aux | grep node
+#  - kill PID

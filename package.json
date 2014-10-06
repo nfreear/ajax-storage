@@ -20,7 +20,9 @@
     "chai": "*"
   },
   "scripts": {
-    "test": "mocha-phantomjs -R spec http://127.0.0.1:8010/test/test_runner.html"
+    "server": "( node test/test-server.js ) &",
+    "test": "mocha-phantomjs -R spec http://127.0.0.1:8010/test/test_runner.html",
+    "ps": "ps aux | grep node"
   },
   "repository": {
     "type": "git",

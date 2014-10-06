@@ -37,6 +37,7 @@
     .fail(function () {
       // Handle an error...
     });
+```
 
 ### Usage 4 - global:
 

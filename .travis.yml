@@ -2,12 +2,10 @@ language: node_js
 node_js:
   - "0.11"
 #  - "0.10"
-  - "0.8"
+#  - "0.8"
 #  - "0.6"
 
 before_script:
-#  - "export DISPLAY=:99.0"
-#  - "sh -e /etc/init.d/xvfb start"
-#  - sleep 3 # give xvfb some time to start
-  - rackup  # start a Web server
+#  - rackup  # start a Web server (Ruby)
+  - node test/test-server.js  # Start a Web server (Node)
   - sleep 3 # give Web server some time to bind to sockets, etc

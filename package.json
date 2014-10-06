@@ -4,8 +4,8 @@
   "description": "Seamless HTML5 localStorage caching for jQuery Ajax requests.",
   "main": "ajax-store.js",
   "dependencies": {
-    "xmlhttprequest": "*",
-    "jquery": "*"
+    "jquery": "*",
+    "xmlhttprequest": "*"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -14,12 +14,13 @@
     "grunt-contrib-concat": "~0.3.0",
     "grunt-saucelabs": "*",
     "mocha-phantomjs": "*",
+    "express": "^4.9.5",
     "request": "*",
     "mocha": "*",
     "chai": "*"
   },
   "scripts": {
-    "test": "mocha-phantomjs -R dot test/test_runner.html"
+    "test": "mocha-phantomjs -R dot http://127.0.0.1:8010/test/test_runner.html"
   },
   "repository": {
     "type": "git",

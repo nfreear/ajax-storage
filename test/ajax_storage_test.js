@@ -6,7 +6,10 @@
 if (typeof require !== 'undefined') {
     var $ = require('jquery')
       , X_ajax_storage = require("../ajax-storage.js")
+      , mocha = require("mocha")
       , chai = require("chai");
+
+    mocha.setup('bdd');
 }
 chai.should();
 var expect = chai.expect
@@ -31,7 +34,7 @@ after(function () {
 describe("jQuery", function () {
   this.timeout(10000);
   it("and $ should exist and have a version number of '2.1.1'.", function (done) {
-	console.log("jQuery version:", $.fn.jquery);
+	console.log("jQuery version: " + $.fn.jquery);
 
     expect(jQuery, "jQuery").to.be.a("function");
     expect($, "$").to.equal(jQuery);

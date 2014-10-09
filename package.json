@@ -1,8 +1,8 @@
 {
-  "name": "ajax-store",
+  "name": "ajax-storage",
   "version": "0.1.0",
   "description": "Seamless HTML5 localStorage caching for jQuery Ajax requests.",
-  "main": "ajax-store.js",
+  "main": "ajax-storage.js",
   "dependencies": {
     "jquery": "*",
     "xmlhttprequest": "*"
@@ -15,14 +15,15 @@
     "grunt-saucelabs": "*",
     "mocha-phantomjs": "*",
     "express": "^4.9.5",
+    "minimist": "*",
     "request": "*",
     "mocha": "*",
     "chai": "*"
   },
   "scripts": {
-    "server": "( node test/test-server.js ) &",
+    "start": "( node test/test-server.js --port=8010 ) &",
     "test": "mocha-phantomjs -R spec http://127.0.0.1:8010/test/test_runner.html",
-    "ps": "ps aux | grep node"
+    "ps": "ps aux | grep node # kill PID"
   },
   "repository": {
     "type": "git",

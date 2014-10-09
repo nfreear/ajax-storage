@@ -7,11 +7,11 @@ node_js:
 
 before_script:
 #  - rackup  # start a Web server (Ruby)
-  - ( node test/test-server.js )&   # Fork a Web server (Node)
+  - npm start   # Fork a Web server (Node)
   - sleep 3  # give Web server some time to bind to sockets, etc
 
 script:
-  - mocha-phantomjs -R spec http://127.0.0.1:8010/test/test_runner.html
+  - npm test
 
 #after_script:
 #  - ps aux | grep node

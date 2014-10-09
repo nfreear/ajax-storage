@@ -3,9 +3,11 @@ https://github.com/axemclion/IndexedDBShim/blob/master/Gruntfile.js
 https://github.com/axemclion/jquery-indexeddb/blob/master/GruntFile.js
 */
 /* global module:false */
-"use strict";
+
 
 module.exports = function(grunt) {
+
+    'use strict';
 
     //var request = require('./node_modules/request');
 
@@ -42,12 +44,12 @@ module.exports = function(grunt) {
             },
 			all: {
 				src: [
-					"*.js", "src/**/*.js", "Gruntfile.js",
+					"*.js", "test/**/*.js", "Gruntfile.js",
 					//,"test/**/*.js", "build/**/*.js"
-				]/*,
+				],
 				options: {
 					jshintrc: true
-				}*/
+				}
 			}/*,
 			dist: {
 				src: "dist/jquery.js",

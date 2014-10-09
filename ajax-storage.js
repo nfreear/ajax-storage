@@ -143,7 +143,7 @@ if (typeof require !== 'undefined') {  // Node.js
       storage = window[store_type],
       delta = 0;
 
-    if (!store_type || !window[store_type]) return;
+    if (!store_type || !window[store_type]) { return; }
 
     value = storage.getItem(store_prefix + 'data');
 
@@ -167,7 +167,7 @@ if (typeof require !== 'undefined') {  // Node.js
       dt = new Date(),
       storage = window[store_type];
 
-    if (!store_type || !window[store_type]) return;
+    if (!store_type || !window[store_type]) { return; }
 
     storage.setItem(store_prefix + 'data', JSON.stringify(data));
     storage.setItem(store_prefix + 'timestamp', dt.getTime());

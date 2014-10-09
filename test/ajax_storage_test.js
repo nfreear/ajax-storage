@@ -3,6 +3,9 @@
   @link http://chaijs.com/api/bdd/
   @link http://blog.revathskumar.com/2013/03/testing-jquery-ajax-with-mocha-and-sinon.html
 */
+
+'use strict';
+
 if (typeof require !== 'undefined') {
     var $ = require('jquery')
       , X_ajax_storage = require("../ajax-storage.js")
@@ -106,7 +109,7 @@ describe("$.ajax_storage - storage", function () {
       url: URL,
       dataType: "json",
       storage_max_age: STORAGE_MAX_AGE,
-      log: function() { console.log(arguments) }
+      log: function() { console.log(arguments); }
     })
     .done(function (data, textStatus, jqXHR) {
         console.log("$.ajax_storage - storage: success", arguments);

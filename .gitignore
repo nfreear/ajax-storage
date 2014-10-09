@@ -32,7 +32,8 @@ node_modules
 # NDF: For now...
 
 .DS_Store
-*copy.*
+*copy
+*.diff
 src/header.js
 local-build/
 

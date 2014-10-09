@@ -1,6 +1,6 @@
 # ajax-storage
 
-[![Build Status][travis-img]][travis]
+[![Build status][travis-img]][travis]
 
 `localStorage` and `sessionStorage` caching seamlessly built onto jQuery Ajax HTTP requests. For the browser.
 
@@ -46,7 +46,7 @@
     <script>
     $.ajaxPrefilter(function (options, ...) {
       options.storage = true;
-      options: storage_max_age = 20 * 60 * 1000;
+      options.storage_max_age = 20 * 60 * 1000;
     });
 
     <script src="ajax-storage.js">
@@ -57,7 +57,7 @@
 
 ## License
 
-©2014 [Nick Freear][]. License: [MIT][]
+©2014 [Nick Freear][]. License: [MIT][].
 
 
 [@nfreear/ajax-storage]: https://github.com/nfreear/ajax-storage

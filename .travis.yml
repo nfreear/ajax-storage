@@ -6,7 +6,7 @@ node_js:
 #  - "0.6"
 
 before_script:
-#  - rackup  # start a Web server (Ruby)
+  - npm install -g grunt-cli  # bower
   - npm start   # Fork a Web server (Node)
   - sleep 3  # give Web server some time to bind to sockets, etc
 

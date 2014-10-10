@@ -5,9 +5,9 @@ ajax-storage Javascript, version 0.0.1.
 @link		https://github.com/nfreear/ajax-storage
 */
 
-if (typeof require !== 'undefined') {  // Node.js
+/*if (typeof require !== 'undefined') {  // Node.js
   var jQuery = require('jquery');
-}
+}*/
 
 
 //;

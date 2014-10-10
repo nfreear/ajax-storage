@@ -14,7 +14,7 @@ if (typeof require !== 'undefined') {
 }
 chai.should();
 var expect = chai.expect
-  , URL = "data/test-json.js"
+  , JSON_URL = "data/test-json.js"
   , STORAGE_MAX_AGE = 5 * 60 * 1000
   ;
 
@@ -33,14 +33,13 @@ after(function () {
 
 
 describe("jQuery", function () {
-  this.timeout(10000);
-  it("and $ should exist and have a version number of '2.1.1'.", function (done) {
+  this.timeout(2000);
+  it("and $ should exist and have a version number like '2.1.1'.", function (done) {
 	console.log("jQuery version: " + $.fn.jquery);
 
     expect(jQuery, "jQuery").to.be.a("function");
     expect($, "$").to.equal(jQuery);
-    expect($.fn.jquery).to.equal("2.1.1");
-
+    expect($.fn.jquery).to.match(/^2\.\d+\.\d+/);
     expect($.ajax, "$.ajax()").to.be.a("function");
     done();
   });
@@ -51,7 +50,7 @@ describe("$.ajax", function () {
   this.timeout(2000);
   it("should get JSON data via HTTP and expose it via 'done()'.", function (done) {
     var result = $.ajax({
-      url: URL,  //"/404_Not_found"
+      url: JSON_URL,  //"/404_Not_found"
       dataType: "json"
     })
     .done(function (data) {
@@ -74,7 +73,7 @@ describe("$.ajaxStorage - HTTP", function () {
   this.timeout(2000);
   it("should get JSON data via HTTP, and indicate that HTTP is used.", function (done) {
     var result = $.ajax_storage({
-      url: URL,
+      url: JSON_URL,
       dataType: "json",
       storageMaxAge: STORAGE_MAX_AGE,
 
@@ -104,9 +103,9 @@ describe("$.ajaxStorage - HTTP", function () {
 describe("$.ajax_storage - storage", function () {
   this.timeout(2000);
   it("should get JSON data from `localStorage`, and indicate that storage is used.", function (done) {
-    //var result = $.getJSON(URL)
+    //var result = $.getJSON(JSON_URL)
     var result = $.ajax_storage({
-      url: URL,
+      url: JSON_URL,
       dataType: "json",
       storage_max_age: STORAGE_MAX_AGE,
       log: function() { console.log(arguments); }

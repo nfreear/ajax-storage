@@ -27,7 +27,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/nfreear/ajax-store.git"
+    "url": "git://github.com/nfreear/ajax-storage.git"
   },
   "keywords": [
     "jQuery",
@@ -42,7 +42,7 @@
   "readmeFilename": "README.md",
   "gitHead": "",
   "bugs": {
-    "url": "https://github.com/nfreear/ajax-store/issues"
+    "url": "https://github.com/nfreear/ajax-storage/issues"
   },
   "browser": {
     "xmlhttprequest": false
@@ -53,7 +53,6 @@
       "ie/8..latest",
       "chrome/36..latest",
       "firefox/31..latest",
-      "opera/12.0",
       "opera/24..latest",
       "safari/latest",
       "firefox/nightly",

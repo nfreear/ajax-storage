@@ -11,6 +11,7 @@ before_script:
   - sleep 3  # give Web server some time to bind to sockets, etc
 
 script:
+  - grunt
   - npm test
 
 #after_script:

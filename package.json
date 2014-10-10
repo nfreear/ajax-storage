@@ -21,7 +21,7 @@
     "chai": "*"
   },
   "scripts": {
-    "start": "( node test/test-server.js --port=8010 ) &",
+    "start": "( node test/http/server.js --port=8010 ) &",
     "test": "mocha-phantomjs -R spec http://127.0.0.1:8010/test/test_runner.html",
     "ps": "ps aux | grep node # kill PID"
   },
